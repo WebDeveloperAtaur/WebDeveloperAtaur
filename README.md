@@ -1,5 +1,7 @@
 
-
+<p align="center">
+  <img src="https://raw.githubusercontent.com/WebDeveloperAtaur/WebDeveloperAtaur/main/web%20developer%20ataur.png" alt="MD Ataur Rahman Banner" width="100%">
+</p>
 
 <h1 align="center">Hi 👋, I'm MD Ataur Rahman</h1>
 <h3 align="center">A Full-Stack Web Developer from Bangladesh passionate about building modern, responsive, and scalable web applications.</h3>
