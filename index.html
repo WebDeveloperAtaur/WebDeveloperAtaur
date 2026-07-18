@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ataur Rahman — Front-End Developer &amp; WordPress Expert</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root{
+    --navy:#0B1B3E;
+    --royal:#1E3A8A;
+    --blue:#2563EB;
+    --sky:#5B9BF5;
+    --light:#BFDBFE;
+    --pale:#EEF4FF;
+    --paper:#FBFCFF;
+    --ink:#0B1224;
+    --muted:#5A6B8C;
+    --line:#DCE6FA;
+    --font-display:'Space Grotesk',sans-serif;
+    --font-body:'Inter',sans-serif;
+    --font-mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--font-body);
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--light);color:var(--navy);}
+
+  /* ambient circuit backdrop */
+  .grid-bg{
+    position:fixed; inset:0; z-index:-1;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:56px 56px;
+    -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%);
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%);
+    opacity:.6;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 6vw;
+    background:rgba(251,252,255,.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .logo{
+    font-family:var(--font-mono); font-weight:500; font-size:15px;
+    color:var(--royal); letter-spacing:.5px;
+  }
+  .logo span{color:var(--sky);}
+  nav ul{list-style:none; display:flex; gap:32px;}
+  nav a{
+    font-size:14px; font-weight:500; color:var(--muted);
+    position:relative; transition:color .2s;
+  }
+  nav a::after{
+    content:''; position:absolute; left:0; bottom:-6px; width:0; height:2px;
+    background:linear-gradient(90deg,var(--royal),var(--sky));
+    transition:width .25s;
+  }
+  nav a:hover{color:var(--royal);}
+  nav a:hover::after{width:100%;}
+  .nav-toggle{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center;
+    padding:9vh 6vw 8vh; max-width:1280px; margin:0 auto;
+  }
+  .eyebrow{
+    font-family:var(--font-mono); font-size:13px; color:var(--blue);
+    display:flex; align-items:center; gap:10px; margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:''; width:8px; height:8px; border-radius:50%;
+    background:var(--sky); box-shadow:0 0 0 4px var(--pale);
+    animation:pulse 2s infinite;
+  }
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 4px var(--pale);}50%{box-shadow:0 0 0 8px var(--pale);}}
+  h1{
+    font-family:var(--font-display); font-weight:700;
+    font-size:clamp(32px,4.4vw,54px); line-height:1.08; color:var(--navy);
+  }
+  h1 .accent{
+    background:linear-gradient(90deg,var(--royal),var(--sky));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .typed-row{
+    font-family:var(--font-mono); font-size:clamp(15px,1.8vw,19px);
+    color:var(--royal); margin-top:16px; min-height:28px;
+  }
+  .typed-row .cursor{
+    display:inline-block; width:9px; height:1.1em; background:var(--sky);
+    margin-left:3px; vertical-align:text-bottom; animation:blink 1s step-start infinite;
+  }
+  @keyframes blink{50%{opacity:0;}}
+  .hero p.lede{
+    margin-top:22px; max-width:52ch; color:var(--muted); font-size:16px;
+  }
+  .cta-row{display:flex; flex-wrap:wrap; gap:14px; margin-top:32px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:9px;
+    padding:12px 22px; border-radius:8px; font-weight:600; font-size:14px;
+    transition:transform .2s, box-shadow .2s;
+  }
+  .btn-primary{
+    background:linear-gradient(90deg,var(--royal),var(--blue));
+    color:#fff; box-shadow:0 10px 24px -10px rgba(30,58,138,.55);
+  }
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 14px 28px -10px rgba(30,58,138,.65);}
+  .btn-ghost{
+    border:1.5px solid var(--line); color:var(--royal); background:var(--pale);
+  }
+  .btn-ghost:hover{border-color:var(--sky); transform:translateY(-2px);}
+
+  .hero-photo-wrap{
+    position:relative; justify-self:center; width:min(320px,80%);
+  }
+  .ring{
+    position:absolute; inset:-14px; border-radius:50%;
+    background:conic-gradient(from 0deg, var(--royal), var(--sky), var(--light), var(--royal));
+    filter:blur(0);
+    animation:spin 10s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .photo-frame{
+    position:relative; width:100%; aspect-ratio:1/1; border-radius:50%;
+    padding:6px; background:var(--paper);
+  }
+  .photo-frame img{
+    width:100%; height:100%; object-fit:cover; border-radius:50%;
+    display:block; border:2px solid var(--paper);
+  }
+  .badge-tag{
+    position:absolute; bottom:6%; right:-6%;
+    background:#fff; border:1px solid var(--line);
+    border-radius:10px; padding:9px 13px;
+    font-family:var(--font-mono); font-size:12px; color:var(--royal);
+    box-shadow:0 12px 24px -12px rgba(11,27,62,.25);
+    display:flex; align-items:center; gap:6px;
+  }
+  .badge-tag i{color:var(--sky);}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:8vh 6vw; max-width:1280px; margin:0 auto;}
+  .section-head{margin-bottom:44px; max-width:640px;}
+  .section-head .kicker{
+    font-family:var(--font-mono); font-size:12.5px; color:var(--blue);
+    letter-spacing:1.5px; text-transform:uppercase;
+  }
+  .section-head h2{
+    font-family:var(--font-display); font-size:clamp(24px,3vw,34px);
+    color:var(--navy); margin-top:8px;
+  }
+  .section-head p{color:var(--muted); margin-top:10px; font-size:15px;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start;}
+  .about-grid p{color:var(--muted); margin-bottom:14px; font-size:15.5px;}
+  .stat-card-col{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .stat-card{
+    background:linear-gradient(160deg,var(--pale),#fff);
+    border:1px solid var(--line); border-radius:14px; padding:20px;
+  }
+  .stat-card .num{
+    font-family:var(--font-display); font-size:28px; font-weight:700; color:var(--royal);
+  }
+  .stat-card .lbl{font-size:12.5px; color:var(--muted); margin-top:4px;}
+
+  /* ---------- EXPERIENCE TIMELINE ---------- */
+  .timeline{position:relative; padding-left:40px;}
+  .timeline::before{
+    content:''; position:absolute; left:11px; top:6px; bottom:6px; width:2px;
+    background:linear-gradient(180deg,var(--royal),var(--light));
+  }
+  .t-item{position:relative; padding-bottom:38px;}
+  .t-item:last-child{padding-bottom:0;}
+  .t-dot{
+    position:absolute; left:-40px; top:2px; width:24px; height:24px; border-radius:50%;
+    background:#fff; border:2px solid var(--royal); color:var(--royal);
+    display:flex; align-items:center; justify-content:center; font-size:11px;
+    box-shadow:0 0 0 5px var(--paper);
+  }
+  .t-card{
+    background:#fff; border:1px solid var(--line); border-radius:14px;
+    padding:20px 24px; transition:border-color .2s, transform .2s;
+  }
+  .t-card:hover{border-color:var(--sky); transform:translateX(4px);}
+  .t-top{display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; align-items:baseline;}
+  .t-role{font-family:var(--font-display); font-weight:600; font-size:17px; color:var(--navy);}
+  .t-date{font-family:var(--font-mono); font-size:12.5px; color:var(--blue); white-space:nowrap;}
+  .t-org{font-size:14px; color:var(--muted); margin-top:2px;}
+  .t-org a{color:var(--royal); border-bottom:1px dotted var(--sky);}
+  .t-desc{font-size:14px; color:var(--muted); margin-top:10px;}
+  .t-current{
+    display:inline-block; margin-left:8px; font-family:var(--font-mono); font-size:10.5px;
+    color:#0EA36B; background:#E8FBF3; border:1px solid #BEF0D9;
+    padding:2px 8px; border-radius:20px; vertical-align:middle;
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skills-wrap{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
+  .skill-cat h3{
+    font-family:var(--font-display); font-size:15px; color:var(--royal);
+    margin-bottom:16px; display:flex; align-items:center; gap:8px;
+  }
+  .skill-cat h3 i{color:var(--sky);}
+  .chip-grid{display:flex; flex-wrap:wrap; gap:10px;}
+  .chip{
+    display:flex; align-items:center; gap:8px;
+    background:var(--pale); border:1px solid var(--line); border-radius:9px;
+    padding:9px 14px; font-size:13.5px; font-weight:500; color:var(--navy);
+    transition:background .2s, border-color .2s, transform .2s;
+  }
+  .chip i{color:var(--blue); font-size:14px;}
+  .chip:hover{background:#fff; border-color:var(--sky); transform:translateY(-2px);}
+
+  /* ---------- FEATURED WORK ---------- */
+  .work-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  .work-card{
+    background:#fff; border:1px solid var(--line); border-radius:16px; padding:26px;
+    position:relative; overflow:hidden; transition:transform .2s, box-shadow .2s;
+  }
+  .work-card:hover{transform:translateY(-4px); box-shadow:0 20px 40px -20px rgba(30,58,138,.28);}
+  .work-card::before{
+    content:''; position:absolute; top:-40px; right:-40px; width:110px; height:110px;
+    background:radial-gradient(circle,var(--light),transparent 70%); opacity:.6;
+  }
+  .work-icon{
+    width:46px; height:46px; border-radius:12px;
+    background:linear-gradient(135deg,var(--royal),var(--sky));
+    display:flex; align-items:center; justify-content:center; color:#fff; font-size:18px;
+    margin-bottom:16px;
+  }
+  .work-card h4{font-family:var(--font-display); font-size:16px; color:var(--navy); margin-bottom:8px;}
+  .work-card p{font-size:13.5px; color:var(--muted);}
+  .work-tag{
+    display:inline-block; margin-top:14px; font-family:var(--font-mono); font-size:11px;
+    color:var(--royal); background:var(--pale); padding:3px 9px; border-radius:6px;
+  }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  .contact-band{
+    background:linear-gradient(120deg,var(--navy),var(--royal) 60%,var(--blue));
+    border-radius:24px; padding:60px 6vw; text-align:center; color:#fff;
+    position:relative; overflow:hidden;
+  }
+  .contact-band::before{
+    content:''; position:absolute; inset:0;
+    background-image:radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+    background-size:22px 22px; opacity:.5;
+  }
+  .contact-band h2{font-family:var(--font-display); font-size:clamp(24px,3.4vw,36px); position:relative;}
+  .contact-band p{color:var(--light); margin-top:12px; position:relative; max-width:52ch; margin-inline:auto;}
+  .contact-links{
+    margin-top:34px; display:flex; flex-wrap:wrap; justify-content:center; gap:14px; position:relative;
+  }
+  .clink{
+    display:flex; align-items:center; gap:9px;
+    background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.22);
+    padding:11px 20px; border-radius:9px; font-size:13.5px; font-weight:500;
+    transition:background .2s, transform .2s;
+  }
+  .clink:hover{background:rgba(255,255,255,.2); transform:translateY(-2px);}
+
+  footer{
+    text-align:center; padding:36px 6vw 50px; color:var(--muted); font-size:13px;
+  }
+  footer .made{font-family:var(--font-mono); color:var(--sky);}
+
+  @media (max-width:860px){
+    nav ul{display:none;}
+    .hero{grid-template-columns:1fr; text-align:center; padding-top:6vh;}
+    .eyebrow{justify-content:center;}
+    .cta-row{justify-content:center;}
+    .hero-photo-wrap{order:-1; width:min(240px,60%);}
+    .about-grid, .skills-wrap{grid-template-columns:1fr;}
+    .work-grid{grid-template-columns:1fr;}
+    .badge-tag{right:0;}
+  }
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<header>
+  <div class="logo">&lt;Ataur<span>.dev</span>/&gt;</div>
+  <nav>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div>
+    <div class="eyebrow">OPEN TO FRONT-END &amp; WORDPRESS PROJECTS</div>
+    <h1>Ataur Rahman<br><span class="accent">builds fast, functional websites.</span></h1>
+    <div class="typed-row"><span id="typed"></span><span class="cursor"></span></div>
+    <p class="lede">Front-End Developer Executive at Freedom IT Institution, based in Dhaka, Bangladesh. I turn ideas into production-ready sites and landing pages — and use AI tools to build them faster without cutting corners.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="mailto:ataurrahman.iwe.duet@gmail.com"><i class="fa-solid fa-paper-plane"></i> Get in touch</a>
+      <a class="btn btn-ghost" href="https://github.com/WebDeveloperAtaur" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View GitHub</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/webdeveloperataur/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+    </div>
+  </div>
+  <div class="hero-photo-wrap">
+    <div class="ring"></div>
+    <div class="photo-frame">
+      <img src="https://avatars.githubusercontent.com/u/304537058?v=4" alt="Ataur Rahman">
+    </div>
+    <div class="badge-tag"><i class="fa-solid fa-location-dot"></i> Dhaka, BD</div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="section-head">
+    <div class="kicker">// About</div>
+    <h2>From WordPress builds to full ad-tech funnels.</h2>
+  </div>
+  <div class="about-grid">
+    <div>
+      <p>I'm a web developer and WordPress expert who leverages AI tools to build websites faster and smarter — turning ideas into fast, functional digital products for clients across healthcare, e-commerce, and logistics.</p>
+      <p>Beyond development, I run a free Natural Health Care Training Program for students, unemployed youth, and working professionals, and I'm passionate about training the next generation of web developers.</p>
+    </div>
+    <div class="stat-card-col">
+      <div class="stat-card"><div class="num">5+</div><div class="lbl">Companies &amp; brands worked with</div></div>
+      <div class="stat-card"><div class="num">HTML–PHP</div><div class="lbl">Full front-end to WordPress stack</div></div>
+      <div class="stat-card"><div class="num">GA4</div><div class="lbl">GTM &amp; Meta Pixel funnel tracking</div></div>
+      <div class="stat-card"><div class="num">BD</div><div class="lbl">Based in Dhaka, Bangladesh</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPERIENCE ================= -->
+<section id="experience">
+  <div class="section-head">
+    <div class="kicker">// Experience</div>
+    <h2>Where I've worked</h2>
+    <p>Dates for earlier roles are approximate.</p>
+  </div>
+  <div class="timeline">
+
+    <div class="t-item">
+      <div class="t-dot"><i class="fa-solid fa-code"></i></div>
+      <div class="t-card">
+        <div class="t-top">
+          <div class="t-role">Front-End Developer Executive <span class="t-current">CURRENT</span></div>
+          <div class="t-date">Dec 2024 — Present</div>
+        </div>
+        <div class="t-org"><a href="https://freedomitinstitutions.com/" target="_blank" rel="noopener">Freedom IT Institution</a></div>
+        <div class="t-desc">Building and maintaining front-end interfaces, applying AI-assisted workflows to ship faster, and mentoring learners in web design fundamentals.</div>
+      </div>
+    </div>
+
+    <div class="t-item">
+      <div class="t-dot"><i class="fa-solid fa-network-wired"></i></div>
+      <div class="t-card">
+        <div class="t-top">
+          <div class="t-role">Web Developer</div>
+          <div class="t-date">Aug 2024 — Nov 2024</div>
+        </div>
+        <div class="t-org">Vesoj Network</div>
+        <div class="t-desc">Built and optimized landing pages, implemented WooCommerce order flows, and set up GTM/GA4 and Meta Pixel conversion tracking for ad campaigns.</div>
+      </div>
+    </div>
+
+    <div class="t-item">
+      <div class="t-dot"><i class="fa-solid fa-layer-group"></i></div>
+      <div class="t-card">
+        <div class="t-top">
+          <div class="t-role">Web Developer</div>
+          <div class="t-date">May 2024 — Jul 2024</div>
+        </div>
+        <div class="t-org">Sajer Dala</div>
+        <div class="t-desc">Developed and styled storefront pages, working closely with the marketing team on performance and mobile responsiveness.</div>
+      </div>
+    </div>
+
+    <div class="t-item">
+      <div class="t-dot"><i class="fa-solid fa-heart-pulse"></i></div>
+      <div class="t-card">
+        <div class="t-top">
+          <div class="t-role">Web Developer</div>
+          <div class="t-date">Jan 2024 — Apr 2024</div>
+        </div>
+        <div class="t-org">Al Hikmah Health Care</div>
+        <div class="t-desc">Built product and landing pages for herbal health products, focused on clean UI and Bengali-language content.</div>
+      </div>
+    </div>
+
+    <div class="t-item">
+      <div class="t-dot"><i class="fa-solid fa-shapes"></i></div>
+      <div class="t-card">
+        <div class="t-top">
+          <div class="t-role">Web Developer</div>
+          <div class="t-date">Jun 2023 — Dec 2023</div>
+        </div>
+        <div class="t-org">Square Group</div>
+        <div class="t-desc">Contributed to front-end pages and UI components as part of a larger web development team.</div>
+      </div>
+    </div>
+
+    <div class="t-item">
+      <div class="t-dot"><i class="fa-solid fa-motorcycle"></i></div>
+      <div class="t-card">
+        <div class="t-top">
+          <div class="t-role">Web Developer (Intern)</div>
+          <div class="t-date">Jan 2023 — May 2023</div>
+        </div>
+        <div class="t-org">Pathao Bangladesh</div>
+        <div class="t-desc">Assisted with front-end fixes and UI updates, gaining first hands-on experience in a production codebase.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills">
+  <div class="section-head">
+    <div class="kicker">// Skills</div>
+    <h2>Tools I build with</h2>
+  </div>
+  <div class="skills-wrap">
+    <div class="skill-cat">
+      <h3><i class="fa-solid fa-code"></i> Front-End &amp; CMS</h3>
+      <div class="chip-grid">
+        <div class="chip"><i class="fa-brands fa-html5"></i> HTML5</div>
+        <div class="chip"><i class="fa-brands fa-css3-alt"></i> CSS3</div>
+        <div class="chip"><i class="fa-brands fa-js"></i> JavaScript</div>
+        <div class="chip"><i class="fa-brands fa-bootstrap"></i> Bootstrap</div>
+        <div class="chip"><i class="fa-brands fa-wordpress"></i> WordPress</div>
+        <div class="chip"><i class="fa-solid fa-cart-shopping"></i> WooCommerce</div>
+        <div class="chip"><i class="fa-brands fa-php"></i> PHP</div>
+        <div class="chip"><i class="fa-brands fa-git-alt"></i> Git &amp; GitHub</div>
+      </div>
+    </div>
+    <div class="skill-cat">
+      <h3><i class="fa-solid fa-bullhorn"></i> Marketing &amp; Analytics</h3>
+      <div class="chip-grid">
+        <div class="chip"><i class="fa-brands fa-meta"></i> Meta Ads</div>
+        <div class="chip"><i class="fa-solid fa-chart-line"></i> GA4 / GTM</div>
+        <div class="chip"><i class="fa-solid fa-bullseye"></i> Meta Pixel</div>
+        <div class="chip"><i class="fa-solid fa-gauge-high"></i> Page Speed</div>
+        <div class="chip"><i class="fa-brands fa-whatsapp"></i> WhatsApp Integration</div>
+        <div class="chip"><i class="fa-solid fa-wand-magic-sparkles"></i> AI-Assisted Dev</div>
+        <div class="chip"><i class="fa-brands fa-figma"></i> UI/UX Basics</div>
+        <div class="chip"><i class="fa-solid fa-object-group"></i> Adobe Photoshop</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FEATURED WORK ================= -->
+<section id="work">
+  <div class="section-head">
+    <div class="kicker">// Featured Work</div>
+    <h2>Recent projects</h2>
+  </div>
+  <div class="work-grid">
+    <div class="work-card">
+      <div class="work-icon"><i class="fa-solid fa-leaf"></i></div>
+      <h4>Vesoj Network — Alargy Shifa</h4>
+      <p>End-to-end landing page for a herbal supplement: Bengali UI, WooCommerce checkout, cash-on-delivery logic, and dynamic pricing.</p>
+      <span class="work-tag">HTML · WooCommerce API</span>
+    </div>
+    <div class="work-card">
+      <div class="work-icon"><i class="fa-solid fa-chart-simple"></i></div>
+      <h4>Full-Funnel Conversion Tracking</h4>
+      <p>GTM dataLayer (GA4 schema) and Meta Pixel events across view, cart, checkout, and purchase, built on a centralized product object.</p>
+      <span class="work-tag">GTM · Meta Pixel</span>
+    </div>
+    <div class="work-card">
+      <div class="work-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+      <h4>Natural Health Care Training</h4>
+      <p>Free WhatsApp-based training program for students and job seekers on natural health care fundamentals.</p>
+      <span class="work-tag">Community · Outreach</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="contact-band">
+    <h2>Let's build something fast.</h2>
+    <p>Available for front-end, WordPress, and landing-page projects — reach out any time.</p>
+    <div class="contact-links">
+      <a class="clink" href="mailto:ataurrahman.iwe.duet@gmail.com"><i class="fa-solid fa-envelope"></i> ataurrahman.iwe.duet@gmail.com</a>
+      <a class="clink" href="tel:+8801777088976"><i class="fa-solid fa-phone"></i> 01777-088976</a>
+      <a class="clink" href="https://www.linkedin.com/in/webdeveloperataur/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+      <a class="clink" href="https://github.com/WebDeveloperAtaur" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
+      <a class="clink" href="#top"><i class="fa-solid fa-location-dot"></i> Dhaka, Bangladesh</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Ataur Rahman · <span class="made">built with HTML, CSS &amp; a little AI help</span>
+</footer>
+
+<script>
+  const roles = [
+    "Front-End Developer Executive",
+    "WordPress Expert",
+    "AI-Powered Builder",
+    "Web Design & Development Trainer"
+  ];
+  const el = document.getElementById('typed');
+  let ri = 0, ci = 0, deleting = false;
+
+  function tick(){
+    const word = roles[ri];
+    if(!deleting){
+      ci++;
+      el.textContent = word.slice(0, ci);
+      if(ci === word.length){ deleting = true; setTimeout(tick, 1400); return; }
+    } else {
+      ci--;
+      el.textContent = word.slice(0, ci);
+      if(ci === 0){ deleting = false; ri = (ri + 1) % roles.length; }
+    }
+    setTimeout(tick, deleting ? 40 : 70);
+  }
+  tick();
+</script>
+</body>
+</html>
