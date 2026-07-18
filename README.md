@@ -1,7 +1,7 @@
 
 <div align="center">
 
-<img src="[https://avatars.githubusercontent.com/u/304537058?v=4](https://github.com/WebDeveloperAtaur/WebDeveloperAtaur/blob/main/web%20developer%20ataur.png?raw=true)" width="150" height="150" style="border-radius:50%;border:4px solid #2563EB;" alt="Ataur Rahman"/>
+<img src="https://github.com/WebDeveloperAtaur/WebDeveloperAtaur/blob/main/web%20developer%20ataur.png?raw=true" width="150" height="150" style="border-radius:50%;border:4px solid #2563EB;" alt="Ataur Rahman"/>
 
 # Hi, I'm Ataur Rahman 👋
 
