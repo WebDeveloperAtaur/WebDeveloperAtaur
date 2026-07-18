@@ -46,13 +46,7 @@ Beyond development, I run a **free Natural Health Care Training Program** for st
 ![PHP](https://img.shields.io/badge/PHP-777BB4?style=flat-square&logo=php&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
 
-**Marketing & Analytics**
 
-![Meta Ads](https://img.shields.io/badge/Meta_Ads-0866FF?style=flat-square&logo=meta&logoColor=white)
-![Google Analytics](https://img.shields.io/badge/GA4_%2F_GTM-E37400?style=flat-square&logo=googleanalytics&logoColor=white)
-![WhatsApp](https://img.shields.io/badge/WhatsApp_API-25D366?style=flat-square&logo=whatsapp&logoColor=white)
-![Photoshop](https://img.shields.io/badge/Photoshop-31A8FF?style=flat-square&logo=adobephotoshop&logoColor=white)
-![Figma](https://img.shields.io/badge/UI%2FUX_Basics-F24E1E?style=flat-square&logo=figma&logoColor=white)
 
 ---
 
@@ -82,7 +76,7 @@ Beyond development, I run a **free Natural Health Care Training Program** for st
 ### 📈 GitHub Stats
 
 <img src="https://github-readme-stats.vercel.app/api?username=WebDeveloperAtaur&show_icons=true&theme=default&hide_border=true&title_color=1E3A8A&icon_color=2563EB&text_color=333" width="49%" alt="Ataur's GitHub stats"/>
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=WebDeveloperAtaur&theme=default&hide_border=true&background=FFFFFF&ring=2563EB&fire=1E3A8A" width="49%" alt="Ataur's streak stats"/>
+<img src="https://streak-stats.demolab.com/?user=WebDeveloperAtaur&theme=default&hide_border=true&background=FFFFFF&ring=2563EB&fire=1E3A8A" width="49%" alt="Ataur's streak stats"/>
 
 ---
 
